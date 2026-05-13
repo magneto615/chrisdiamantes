@@ -1,72 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>chrisdiamantes.com</title>
   <style>
-    /* ── Tokens ───────────────────────────────────────────────────────────── */
     :root {
-      --bg:       #080808;
-      --surface:  #111113;
+      --bg: #080808;
+      --surface: #111113;
       --surface2: #18181b;
-      --border:   rgba(255,255,255,0.07);
-      --border2:  rgba(255,255,255,0.12);
-      --text1:    #f4f4f5;
-      --text2:    #a1a1aa;
-      --text3:    #71717a;
-      --accent:   #e67e22;
-      --shadow:   rgba(0,0,0,0.6);
-    }
-    .light {
-      --bg:       #f4f4f5;
-      --surface:  #ffffff;
-      --surface2: #e8e8ed;
-      --border:   rgba(0,0,0,0.07);
-      --border2:  rgba(0,0,0,0.13);
-      --text1:    #18181b;
-      --text2:    #52525b;
-      --text3:    #a1a1aa;
-      --accent:   #e67e22;
-      --shadow:   rgba(0,0,0,0.10);
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --text1: #f4f4f5;
+      --text2: #a1a1aa;
+      --text3: #71717a;
+      --accent: #e67e22;
+      --shadow: rgba(0,0,0,0.6);
     }
 
-    /* ── Reset ────────────────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    .light {
+      --bg: #f4f4f5;
+      --surface: #ffffff;
+      --surface2: #e8e8ed;
+      --border: rgba(0,0,0,0.07);
+      --border2: rgba(0,0,0,0.13);
+      --text1: #18181b;
+      --text2: #52525b;
+      --text3: #a1a1aa;
+      --shadow: rgba(0,0,0,0.10);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
+      min-height: 100vh;
       background: var(--bg);
       color: var(--text1);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
       transition: background .25s, color .25s;
     }
 
-    /* ── Header ───────────────────────────────────────────────────────────── */
     header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 20px 32px;
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      z-index: 10;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 10px;
+      color: inherit;
       text-decoration: none;
     }
 
     .brand-pip {
-      width: 9px; height: 9px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 10px var(--accent), 0 0 20px rgba(230,126,34,0.4);
@@ -75,78 +78,97 @@
     .brand-name {
       font-size: 15px;
       font-weight: 600;
-      color: var(--text1);
       letter-spacing: -0.2px;
     }
 
-    .header-right {
+    .icon-btn {
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      background: var(--surface2);
+      justify-content: center;
+      width: 34px;
+      height: 34px;
       border: 1px solid var(--border);
       border-radius: 8px;
-      width: 34px; height: 34px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
+      background: var(--surface2);
       color: var(--text2);
+      cursor: pointer;
       transition: color .15s, border-color .15s;
     }
-    .icon-btn:hover { color: var(--text1); border-color: var(--border2); }
-    .icon-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
 
-    /* ── Main ─────────────────────────────────────────────────────────────── */
+    .icon-btn:hover {
+      color: var(--text1);
+      border-color: var(--border2);
+    }
+
+    .icon-btn svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
     main {
       max-width: 980px;
       margin: 0 auto;
       padding: 52px 24px 80px;
     }
 
-    /* ── Hero ─────────────────────────────────────────────────────────────── */
     .hero {
-      text-align: center;
       margin-bottom: 60px;
+      text-align: center;
     }
+
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      margin-bottom: 14px;
+      color: var(--accent);
       font-size: 11px;
       font-weight: 600;
       letter-spacing: .1em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 14px;
     }
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content: '';
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: "";
       display: block;
-      width: 20px; height: 1px;
+      width: 20px;
+      height: 1px;
       background: var(--accent);
       opacity: .5;
     }
-    .hero h1 {
+
+    h1 {
+      margin-bottom: 14px;
+      color: var(--text1);
       font-size: clamp(32px, 5vw, 52px);
       font-weight: 700;
       letter-spacing: -1.5px;
       line-height: 1.1;
-      color: var(--text1);
-      margin-bottom: 14px;
     }
-    .hero h1 span { color: var(--accent); }
-    .hero p {
-      font-size: 15px;
+
+    h1 .accent {
+      color: var(--accent);
+    }
+
+    h1 .muted {
       color: var(--text2);
-      max-width: 380px;
+    }
+
+    .hero p {
+      max-width: 420px;
       margin: 0 auto;
+      color: var(--text2);
+      font-size: 15px;
       line-height: 1.6;
     }
 
-    /* ── Section ──────────────────────────────────────────────────────────── */
-    .section { margin-bottom: 44px; }
+    .section {
+      margin-bottom: 44px;
+    }
 
     .section-header {
       display: flex;
@@ -154,150 +176,202 @@
       gap: 10px;
       margin-bottom: 14px;
     }
+
     .section-label {
+      color: var(--text3);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: .09em;
       text-transform: uppercase;
-      color: var(--text3);
     }
+
     .section-line {
       flex: 1;
       height: 1px;
       background: var(--border);
     }
 
-    /* ── Grid ─────────────────────────────────────────────────────────────── */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
       gap: 10px;
     }
 
-    /* ── Card ─────────────────────────────────────────────────────────────── */
     .card {
+      position: relative;
       display: flex;
       align-items: center;
       gap: 14px;
+      overflow: hidden;
       padding: 14px 16px;
-      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      text-decoration: none;
+      background: var(--surface);
       color: inherit;
+      text-decoration: none;
       transition: transform .18s, box-shadow .18s, border-color .18s, background .18s;
-      position: relative;
-      overflow: hidden;
     }
+
     .card::before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
+      border-radius: inherit;
       background: linear-gradient(135deg, var(--card-glow, transparent) 0%, transparent 60%);
       opacity: 0;
-      transition: opacity .2s;
       pointer-events: none;
-      border-radius: inherit;
+      transition: opacity .2s;
     }
+
     .card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 28px var(--shadow);
       border-color: var(--card-color, var(--border2));
       background: var(--surface2);
+      box-shadow: 0 8px 28px var(--shadow);
     }
-    .card:hover::before { opacity: 1; }
-    .card:active { transform: translateY(0); }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:active {
+      transform: translateY(0);
+    }
 
     .card-icon {
-      width: 42px; height: 42px;
-      border-radius: 11px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
       flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
       font-size: 20px;
       transition: transform .2s;
     }
-    .card:hover .card-icon { transform: scale(1.08); }
 
-    .card-text { min-width: 0; }
+    .card:hover .card-icon {
+      transform: scale(1.08);
+    }
+
+    .card-text {
+      min-width: 0;
+    }
+
     .card-name {
+      overflow: hidden;
+      margin-bottom: 2px;
+      color: var(--text1);
       font-size: 13px;
       font-weight: 600;
-      color: var(--text1);
-      white-space: nowrap;
-      overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: 2px;
-    }
-    .card-desc {
-      font-size: 11px;
-      color: var(--text2);
       white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    /* ── Arrow badge ──────────────────────────────────────────────────────── */
+    .card-desc {
+      overflow: hidden;
+      color: var(--text2);
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
     .card-arrow {
-      margin-left: auto;
       flex-shrink: 0;
+      margin-left: auto;
       color: var(--text3);
       opacity: 0;
       transition: opacity .18s, transform .18s;
     }
-    .card:hover .card-arrow { opacity: 1; transform: translateX(2px); }
-    .card-arrow svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2.5; }
 
-    /* ── Footer ───────────────────────────────────────────────────────────── */
-    footer {
-      text-align: center;
-      padding: 0 0 40px;
-      font-size: 11px;
-      color: var(--text3);
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(2px);
     }
 
-    /* ── Responsive ───────────────────────────────────────────────────────── */
+    .card-arrow svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+    }
+
+    footer {
+      padding: 0 0 40px;
+      color: var(--text3);
+      font-size: 11px;
+      text-align: center;
+    }
+
     @media (max-width: 520px) {
-      header { padding: 16px 18px; }
-      main { padding: 36px 14px 60px; }
-      .grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-      .card { padding: 12px 12px; gap: 10px; }
-      .card-icon { width: 36px; height: 36px; border-radius: 9px; font-size: 17px; }
-      .card-name { font-size: 12px; }
-      .card-desc { display: none; }
-      .card-arrow { display: none; }
-      .hero { margin-bottom: 40px; }
-      .hero h1 { letter-spacing: -1px; }
+      header {
+        padding: 16px 18px;
+      }
+
+      main {
+        padding: 36px 14px 60px;
+      }
+
+      .hero {
+        margin-bottom: 40px;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .card {
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .card-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        font-size: 17px;
+      }
+
+      .card-name {
+        font-size: 12px;
+      }
+
+      .card-desc,
+      .card-arrow {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-
   <header>
     <a class="brand" href="/">
       <div class="brand-pip"></div>
-      <!-- ↓ Replace with your actual domain -->
-      <span class="brand-name" id="domainLabel">yourdomain.com</span>
+      <span class="brand-name">chrisdiamantes.com</span>
     </a>
-    <div class="header-right">
-      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle light/dark">
-        <svg id="iconMoon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg id="iconSun" viewBox="0 0 24 24" style="display:none">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-      </button>
-    </div>
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle light/dark">
+      <svg id="iconMoon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg id="iconSun" viewBox="0 0 24 24" style="display:none">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
   </header>
 
   <main>
     <div class="hero">
       <div class="hero-eyebrow">Personal Dashboard</div>
-      <!-- ↓ Replace DOMAIN with your actual domain -->
-      <h1>Welcome to <span id="heroName">yourdomain</span><span style="color:var(--text2)">.com</span></h1>
-      <p>Your personal collection of apps, tools, and services — all in one place.</p>
+      <h1>Welcome to <span class="accent">chrisdiamantes</span><span class="muted">.com</span></h1>
+      <p>Your personal collection of apps, tools, and services, all in one place.</p>
     </div>
 
     <div id="sections"></div>
@@ -306,160 +380,137 @@
   <footer id="footer"></footer>
 
   <script>
-    // ─── Config ────────────────────────────────────────────────────────────────
-    // Edit DOMAIN and the apps array, then you're done.
-
-    const DOMAIN = 'chrisdiamantes.com';
+    const DOMAIN = "chrisdiamantes.com";
 
     const apps = [
-      // ── Media ──────────────────────────────────────────────────────────────
       {
-        section: 'Media',
-        name: 'Plex Downloader',
-        desc: 'Search & send torrents',
-        icon: '▶',
-        color: '#e67e22',
-        bg:    'rgba(230,126,34,0.14)',
-        url:   'https://seed.chrisdiamantes.com/',
+        section: "Media",
+        name: "Seed Console",
+        desc: "Search and send torrents",
+        icon: "SC",
+        color: "#e67e22",
+        bg: "rgba(230,126,34,0.14)",
+        url: "https://seed.chrisdiamantes.com/",
       },
       {
-        section: 'Media',
-        name: 'Plex',
-        desc: 'Stream your library',
-        icon: '🎬',
-        color: '#e5a00d',
-        bg:    'rgba(229,160,13,0.14)',
-        url:   'https://app.plex.tv', // ← replace with your Plex URL
+        section: "Media",
+        name: "Plex",
+        desc: "Stream your library",
+        icon: "PX",
+        color: "#e5a00d",
+        bg: "rgba(229,160,13,0.14)",
+        url: "https://app.plex.tv",
       },
       {
-        section: 'Media',
-        name: 'Audiobookshelf',
-        desc: 'Your audiobook library',
-        icon: '🎧',
-        color: '#22c55e',
-        bg:    'rgba(34,197,94,0.14)',
-        url:   'https://audio.chrisdiamantes.com/',
-      },
-
-      // ── Tools ──────────────────────────────────────────────────────────────
-      {
-        section: 'Tools',
-        name: 'qBittorrent',
-        desc: 'Torrent client',
-        icon: '⬇',
-        color: '#4a9eff',
-        bg:    'rgba(74,158,255,0.14)',
-        url:   'https://qbit.chrisdiamantes.com/',
+        section: "Media",
+        name: "Audiobookshelf",
+        desc: "Audiobooks and podcasts",
+        icon: "AB",
+        color: "#22c55e",
+        bg: "rgba(34,197,94,0.14)",
+        url: "https://audio.chrisdiamantes.com/",
       },
       {
-        section: 'Tools',
-        name: 'File Browser',
-        desc: 'Manage seedbox files',
-        icon: '📁',
-        color: '#a78bfa',
-        bg:    'rgba(167,139,250,0.14)',
-        url:   'https://files.chrisdiamantes.com/',
+        section: "Tools",
+        name: "Homarr",
+        desc: "Seedbox hub",
+        icon: "HM",
+        color: "#f87171",
+        bg: "rgba(248,113,113,0.14)",
+        url: "https://hub.chrisdiamantes.com/",
       },
       {
-        section: 'Tools',
-        name: 'Homarr',
-        desc: 'Home server dashboard',
-        icon: '🏠',
-        color: '#f87171',
-        bg:    'rgba(248,113,113,0.14)',
-        url:   'https://hub.chrisdiamantes.com/',
+        section: "Tools",
+        name: "qBittorrent",
+        desc: "Torrent client",
+        icon: "QB",
+        color: "#4a9eff",
+        bg: "rgba(74,158,255,0.14)",
+        url: "https://qbit.chrisdiamantes.com/",
       },
       {
-        section: 'Tools',
-        name: 'Ultra.cc Panel',
-        desc: 'Seedbox control panel',
-        icon: '⚡',
-        color: '#fbbf24',
-        bg:    'rgba(251,191,36,0.14)',
-        url:   'https://cp.ultra.cc/',
+        section: "Tools",
+        name: "Files",
+        desc: "Browse seedbox files",
+        icon: "FL",
+        color: "#a78bfa",
+        bg: "rgba(167,139,250,0.14)",
+        url: "https://files.chrisdiamantes.com/",
       },
-
-      // ── Other ──────────────────────────────────────────────────────────────
       {
-        section: 'Other',
-        name: 'Home Painted Platters',
-        desc: 'homepaintedplatters.com',
-        icon: '🎨',
-        color: '#f472b6',
-        bg:    'rgba(244,114,182,0.14)',
-        url:   'https://homepaintedplatters.com',
+        section: "Tools",
+        name: "Ultra.cc",
+        desc: "Seedbox control panel",
+        icon: "UL",
+        color: "#fbbf24",
+        bg: "rgba(251,191,36,0.14)",
+        url: "https://cp.ultra.cc/",
+      },
+      {
+        section: "Other",
+        name: "Home Painted Platters",
+        desc: "homepaintedplatters.com",
+        icon: "HP",
+        color: "#f472b6",
+        bg: "rgba(244,114,182,0.14)",
+        url: "https://homepaintedplatters.com",
       },
     ];
 
-    // ─── Theme ─────────────────────────────────────────────────────────────────
     const html = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const iconMoon = document.getElementById('iconMoon');
-    const iconSun  = document.getElementById('iconSun');
+    const themeBtn = document.getElementById("themeBtn");
+    const iconMoon = document.getElementById("iconMoon");
+    const iconSun = document.getElementById("iconSun");
 
     function systemDark() {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
     }
 
     function applyTheme(dark) {
-      dark ? html.classList.remove('light') : html.classList.add('light');
-      iconMoon.style.display = dark ? '' : 'none';
-      iconSun.style.display  = dark ? 'none' : '';
+      html.classList.toggle("light", !dark);
+      iconMoon.style.display = dark ? "" : "none";
+      iconSun.style.display = dark ? "none" : "";
     }
 
-    let override = localStorage.getItem('theme'); // 'dark' | 'light' | null
-    applyTheme(override ? override === 'dark' : systemDark());
+    let override = localStorage.getItem("theme");
+    applyTheme(override ? override === "dark" : systemDark());
 
-    themeBtn.addEventListener('click', () => {
-      const isDark = !html.classList.contains('light');
-      override = isDark ? 'light' : 'dark';
-      localStorage.setItem('theme', override);
+    themeBtn.addEventListener("click", () => {
+      const isDark = !html.classList.contains("light");
+      override = isDark ? "light" : "dark";
+      localStorage.setItem("theme", override);
       applyTheme(!isDark);
     });
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!override) applyTheme(e.matches);
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", event => {
+      if (!override) applyTheme(event.matches);
     });
 
-    // ─── Domain label ──────────────────────────────────────────────────────────
-    const parts = DOMAIN.split('.');
-    const ext   = parts.length > 1 ? '.' + parts.slice(1).join('.') : '';
-    const name  = parts[0];
-    document.getElementById('domainLabel').textContent = DOMAIN;
-    document.getElementById('heroName').textContent    = name;
-    document.querySelector('.hero h1').lastChild.textContent = ext;
-    document.title = DOMAIN;
+    const arrowSvg = '<span class="card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>';
+    const sections = [...new Set(apps.map(app => app.section))];
+    const container = document.getElementById("sections");
 
-    // ─── Render cards ──────────────────────────────────────────────────────────
-    const arrowSvg = `<span class="card-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>`;
-
-    const sections = [...new Set(apps.map(a => a.section))];
-    const container = document.getElementById('sections');
-
-    sections.forEach(sec => {
-      const secApps = apps.filter(a => a.section === sec);
-
-      const wrap = document.createElement('div');
-      wrap.className = 'section';
+    sections.forEach(section => {
+      const wrap = document.createElement("div");
+      wrap.className = "section";
       wrap.innerHTML = `
         <div class="section-header">
-          <span class="section-label">${sec}</span>
+          <span class="section-label">${section}</span>
           <span class="section-line"></span>
         </div>
         <div class="grid"></div>
       `;
 
-      const grid = wrap.querySelector('.grid');
-
-      secApps.forEach(app => {
-        const a = document.createElement('a');
-        a.className = 'card';
-        a.href = app.url;
-        a.target = app.url.startsWith('http') ? '_blank' : '_self';
-        a.rel = 'noopener noreferrer';
-        a.style.setProperty('--card-color', app.color);
-        a.style.setProperty('--card-glow', app.bg);
-        a.innerHTML = `
+      const grid = wrap.querySelector(".grid");
+      apps.filter(app => app.section === section).forEach(app => {
+        const link = document.createElement("a");
+        link.className = "card";
+        link.href = app.url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.style.setProperty("--card-color", app.color);
+        link.style.setProperty("--card-glow", app.bg);
+        link.innerHTML = `
           <div class="card-icon" style="background:${app.bg}; color:${app.color}">${app.icon}</div>
           <div class="card-text">
             <div class="card-name">${app.name}</div>
@@ -467,14 +518,13 @@
           </div>
           ${arrowSvg}
         `;
-        grid.appendChild(a);
+        grid.appendChild(link);
       });
 
       container.appendChild(wrap);
     });
 
-    // ─── Footer ────────────────────────────────────────────────────────────────
-    document.getElementById('footer').textContent = `© ${new Date().getFullYear()} ${DOMAIN}`;
+    document.getElementById("footer").textContent = `(c) ${new Date().getFullYear()} ${DOMAIN}`;
   </script>
 </body>
 </html>
