@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; connect-src 'none'">
+<title>Widget Monitor — Sonos sign-in</title>
+<style>
+body{margin:0;background:#101619;color:#f4f7f6;font:18px/1.5 system-ui,sans-serif;display:grid;min-height:100vh;place-items:center}main{max-width:620px;padding:32px}h1{line-height:1.2}textarea{box-sizing:border-box;width:100%;min-height:110px;border:1px solid #52605a;border-radius:12px;padding:12px;background:#19231e;color:white;font:14px monospace}button{padding:15px 24px;border:0;border-radius:12px;background:#60d394;color:#092014;font-size:18px;font-weight:700;cursor:pointer}small{color:#b5c2bb} [hidden]{display:none}
+</style>
+</head>
+<body><main><h1>Sonos sign-in</h1><p id="status">This page completes sign-in started from Widget Monitor.</p>
+<div id="result" hidden><p>Copy the result below, open the Sonos widget settings, paste it into the callback field, and press Finish.</p>
+<textarea id="callback" readonly aria-label="Sonos sign-in result" spellcheck="false"></textarea>
+<p><button id="copy">Copy sign-in result</button></p><small>Treat this result as private. It stays in this page until you close or reload it. Your Sonos password and client secret are never requested here.</small></div>
+<p id="notice" role="status"></p></main>
+<script>
+(() => {
+  const original = location.href;
+  const params = new URL(original).searchParams;
+  history.replaceState(null, '', location.pathname);
+  const status = document.getElementById('status');
+  if (params.has('error')) {
+    status.textContent = 'Sonos sign-in was cancelled or denied. Return to Widget Monitor and try again.';
+    return;
+  }
+  if (!params.get('code') || !params.get('state')) return;
+  status.textContent = 'Sonos returned a sign-in result. Complete the connection in Widget Monitor.';
+  document.getElementById('result').hidden = false;
+  const field = document.getElementById('callback');
+  field.value = original;
+  document.getElementById('copy').addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(original);
+      document.getElementById('notice').textContent = 'Copied. Paste it into Widget Monitor.';
+    } catch {
+      field.focus(); field.select();
+      document.getElementById('notice').textContent = 'Press Ctrl+C to copy the selected result.';
+    }
+  });
+})();
+</script></body></html>
